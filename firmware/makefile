@@ -17,7 +17,7 @@ CFLAGS   += $(INCLUDES)
 
 LDFLAGS  = -Wl,-gc-sections -Wl,-relax
 
-OBJECT_FILES = main.o usart.o
+OBJECT_FILES = main.o I2CSlave.o MAX31865_AVR/max31865.o
 
 .PHONY: Release program fuses all size clean doc
 
