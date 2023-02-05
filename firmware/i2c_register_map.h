@@ -14,7 +14,8 @@ enum I2C_regs{
  */
 /**@{*/
     I2C_FREQ_STATUS_CNT,///< status counter
-
+    I2C_MAX31865_RTD0,
+    I2C_MAX31865_RTD1,
 /**@}*/ // close RDonly
 
     I2C_SIZE_READONLY,  ///< define readonly sector
