@@ -36,6 +36,8 @@
 #include "I2CSlave.h"
 #include "i2c_register_map.h"
 
+#include "MAX31865_AVR/max31865.h"
+
 /******************************************************************************/
 uint8_t i;  // some variable for counting
 
@@ -205,6 +207,11 @@ void setup(void){
 int main(){
     setup();    // setup everything
 
+
+    // INIT MAX31865
+    max_init_port();
+    init_max();
+
     _delay_ms(100);
     uint8_t status_cnt = 0; ///< status counter simple free running counter
 
@@ -221,6 +228,12 @@ int main(){
             TOGGLE(LED1);   // toggle LED as keep alive signal
 
             status_cnt ++;  // increase status counter
+
+            // READOUT MAX31685
+            uint16_t max31865_rtd = max_get_data('r');
+            data[I2C_MAX31865_RTD0] = max31865_rtd & 0xFF;
+            data[I2C_MAX31865_RTD1] = (max31865_rtd >> 7) & 0xFF;
+
         } // end timer done
 
         // if we have received new I2C data, we have to update our
