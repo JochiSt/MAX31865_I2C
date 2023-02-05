@@ -1,0 +1,3 @@
+[submodule "firmware/MAX31865_AVR"]
+	path = firmware/MAX31865_AVR
+	url = https://github.com/JochiSt/MAX31865_AVR.git
