@@ -204,7 +204,7 @@ void setup(void){
 /**
  * main loop
  */
-int main(){
+int main(void){
     setup();    // setup everything
 
 
