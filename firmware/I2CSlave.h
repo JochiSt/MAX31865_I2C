@@ -23,9 +23,6 @@ typedef enum {
     WR_DATA,
 } i2c_state_t;
 
-extern void i2c_wr_callback(uint16_t address, uint8_t data);
-extern uint8_t i2c_rd_callback(uint16_t address);
-
 ISR(TWI_vect);
 
 #endif
