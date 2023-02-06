@@ -111,6 +111,17 @@ void initTimer(void){
     TIMSK0 |= (1<<OCIE0A);
 }
 
+/**
+ * Timer 0 compare interrupt handler
+ * called every 125 clock counts
+ */
+ISR (TIMER0_COMPA_vect){
+    cnt1Hz--;
+    if(cnt1Hz == 0){
+        cnt1Hz = COUNTS_1HZ;    // reset cnt1Hz
+        timerDone = true;       // true if 1Hz done
+    }
+}
 /******************************************************************************/
 
 void readBoardID(void){
