@@ -1,18 +1,6 @@
 /***
- *      ___   ____     ____    __        __          _
- *     |_ _| |___ \   / ___|   \ \      / /   __ _  | |_    ___   _ __
- *      | |    __) | | |        \ \ /\ / /   / _` | | __|  / _ \ | '__|
- *      | |   / __/  | |___      \ V  V /   | (_| | | |_  |  __/ | |
- *     |___| |_____|  \____|      \_/\_/     \__,_|  \__|  \___| |_|
- *                ____
- *               / ___|    ___   _ __    ___    ___    _ __
- *               \___ \   / _ \ | '_ \  / __|  / _ \  | '__|
- *                ___) | |  __/ | | | | \__ \ | (_) | | |
- *               |____/   \___| |_| |_| |___/  \___/  |_|
- *
- * counts frequency at PIN D5 (Timer T1 external input) using a gate
- * time of 1 second. The counts of timer T1 (16bit) including the over-
- * flow are provided via I2C.
+ * Adapter for accessing the MAX31865 via I2C -
+ * so basically and I2C <-> SPI bridge
  *
  * I2C write command:
  *      write register, which should be read in the next read cycle
@@ -33,9 +21,9 @@
 #include "io_manipulation.h"
 #include "config.h"
 
-#include "I2CSlave.h"
 #include "i2c_register_map.h"
 
+#include "I2CSlave.h"
 #include "MAX31865_AVR/max31865.h"
 
 /******************************************************************************/
