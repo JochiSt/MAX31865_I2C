@@ -18,8 +18,6 @@ enum I2C_regs{
     I2C_MAX31865_RTD1,
 /**@}*/ // close RDonly
 
-    I2C_SIZE_READONLY,  ///< define readonly sector
-
 /**
  * \defgroup VERSIONINFO date and time of compilation
  */
@@ -42,7 +40,10 @@ enum I2C_regs{
     CPP_TIME_5,         ///< S
 /**@}*/ // close VERSIONINFO
 
+    I2C_SIZE_READONLY,  ///< define readonly sector
+
     BOARD_ID,           ///< Board ID from EEPROM
+
     I2C_SIZE            ///< maximal used I2C address
 };
 
