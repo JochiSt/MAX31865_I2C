@@ -149,6 +149,9 @@ void setup(void){
         data[i] = 0;
     }
 
+	// set received/requested callbacks
+    I2C_setCallbacks(i2c_wr_callback, i2c_rd_callback);
+
     // initialize I2C
     uint8_t i2cAddr = I2C_ADDR & 0xF8;  // mask out last 3 bits, because
                                         // they are set in the next line
