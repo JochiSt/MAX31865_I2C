@@ -3,16 +3,16 @@
 
 #include "I2CSlave.h"
 
-static void (*I2C_recv)(uint8_t);
-static void (*I2C_req)();
+static void (*I2C_write)(uint16_t, uint8_t);
+static uint8_t (*I2C_read)(uint16_t);
 
 static i2c_state_t state = ADDRESS_HIGH;
 static uint16_t address = 0;
 
-void I2C_setCallbacks(void (*recv)(uint8_t), void (*req)())
+void I2C_setCallbacks(void (*wr)(uint16_t, uint8_t), uint8_t (*rd)(uint16_t))
 {
-    I2C_recv = recv;
-    I2C_req = req;
+    I2C_write = wr;
+    I2C_read  = rd;
 }
 
 void I2C_init(uint8_t address)
@@ -58,7 +58,7 @@ ISR(TWI_vect)
         else if(state == WR_DATA)
         {
             uint8_t data = TWDR;
-            i2c_wr_callback(address, data);
+            I2C_write(address, data);
             ++address;
         }
         TWCR = (1<<TWINT) | (1<<TWEA) | (1<<TWEN) | (1<<TWIE);
@@ -80,7 +80,7 @@ ISR(TWI_vect)
     /* Slave transmit mode */
     case TW_ST_SLA_ACK:
     case TW_ST_DATA_ACK:
-        TWDR = i2c_rd_callback(address);
+        TWDR = I2C_read(address);
         TWCR = (1<<TWINT) | (1<<TWEA) | (1<<TWEN) | (1<<TWIE);
         ++address;
         break;

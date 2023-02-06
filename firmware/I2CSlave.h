@@ -10,7 +10,7 @@
 void I2C_init(uint8_t address);
 void I2C_stop(void);
 
-void I2C_setCallbacks(void (*recv)(uint8_t), void (*req)());
+void I2C_setCallbacks(void (*wr)(uint16_t, uint8_t), uint8_t (*rd)(uint16_t));
 
 inline void __attribute__((always_inline)) I2C_transmitByte(uint8_t data)
 {
