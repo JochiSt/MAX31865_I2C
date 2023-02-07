@@ -278,15 +278,13 @@ int main(void){
             status_cnt ++;  // increase status counter
 
             if(max_connected){
-                if (max_fault_test() == 0){
-                    // No fault
+                // Check is there is new conversion available
+                // READOUT MAX31685
+                uint16_t max31865_rtd = max_get_data('r');
+                data[I2C_MAX31865_RTD0] =  max31865_rtd & 0xFF;
+                data[I2C_MAX31865_RTD1] = (max31865_rtd >> 7) & 0xFF;
 
-                    // Check is there is new conversion available
-                    // READOUT MAX31685
-                    uint16_t max31865_rtd = max_get_data('r');
-                    data[I2C_MAX31865_RTD0] =  max31865_rtd & 0xFF;
-                    data[I2C_MAX31865_RTD1] = (max31865_rtd >> 7) & 0xFF;
-                }else{
+                if (max_fault_test() != 0){
                     // Any fault have been detected
                     // Here you can read the type of fault from fault status
                     // register -> Datasheet page 16
@@ -306,6 +304,8 @@ int main(void){
                     temp = Fault_Error &0x04;
                     if(temp>0) // Fault bit D2 is Set
 
+
+                    data[I2C_MAX31865_FAULT] = Fault_Error;
                     // Fault register isn't cleared automatically. Users are
                     // expected to clear it after every fault.
                     max_spi_write(CONFIGURATION, 0b10000010);
@@ -314,6 +314,9 @@ int main(void){
                     // Setting the device in auto configuration again.
                     max_spi_write(CONFIGURATION, 0b11000000);
                     _delay_ms(700);
+                }else{
+                    // no fault
+                    data[I2C_MAX31865_FAULT] = 0x00;
                 }
             }
 
