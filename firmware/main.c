@@ -221,15 +221,49 @@ int main(void){
     usart_write("Compiliert at "__DATE__" - "__TIME__"\n");
     usart_write("Compiliert with GCC Version "__VERSION__"\n");
 
-    usart_write("Everything initialised\r\n");
+    usart_write("Everything initialised\n");
 
+    usart_write("MAX31865 port INIT\n");
+    max_init_port();
+
+    usart_write("waiting until everything settled\n");
+    _delay_ms(2000);
+    // Initializes communication with max
+    // If communication is done properly function returns 1, otherwise returns 0
+    usart_write("testing the connection\n");
+    max_connected = init_max();
+
+
+    if (max_connected) // Communication successful with max31865, do something
+    {
+        usart_write("MAX31865 connected\n");
+
+    }
+    else // Unable to communicate with the device, do something
+    {
+        usart_write("MAX31865 not connected\n");
+    }
+
+
+    // Set max CONFIGURATION register - datasheet page 13
+    /*
+            D7 - Vbias (1-on, 0-off)
+            D6 - Conversion mode (1-auto, 0-normally off)
+            D5 - Single shot (1-1shot)
+            D4 - Wiring (1-3wire, 0-2/4wire)
+            D3,2 - Fault detection cycle control (datasheet page 14, table 3)
+            D1 - Fault status clear (1 - clear fault status register)
+            D0 - 50Hz/60Hz filter (1-50Hz, 0-60Hz)
+    */
+    if(max_connected){
+        max_spi_write(CONFIGURATION, 0b11000000); // Vbias on, auto mode
+    }
 
     _delay_ms(100);
     uint8_t status_cnt = 0; ///< status counter simple free running counter
 
     // Main program loop
     while(1){
-
         // read and reset counts from timer1
         if(timerDone){
             timerDone = false;
@@ -243,10 +277,45 @@ int main(void){
 
             status_cnt ++;  // increase status counter
 
-            // READOUT MAX31685
-            uint16_t max31865_rtd = max_get_data('r');
-            data[I2C_MAX31865_RTD0] = max31865_rtd & 0xFF;
-            data[I2C_MAX31865_RTD1] = (max31865_rtd >> 7) & 0xFF;
+            if(max_connected){
+                if (max_fault_test() == 0){
+                    // No fault
+
+                    // Check is there is new conversion available
+                    // READOUT MAX31685
+                    uint16_t max31865_rtd = max_get_data('r');
+                    data[I2C_MAX31865_RTD0] =  max31865_rtd & 0xFF;
+                    data[I2C_MAX31865_RTD1] = (max31865_rtd >> 7) & 0xFF;
+                }else{
+                    // Any fault have been detected
+                    // Here you can read the type of fault from fault status
+                    // register -> Datasheet page 16
+                    Fault_Error = max_spi_read(FAULT_STATUS);
+
+                    temp = Fault_Error & 0x80;
+                    if(temp>0) // Fault bit D7 is Set
+                    temp = Fault_Error & 0x40;
+                    if(temp>0) // Fault bit D6 is Set
+                    temp = Fault_Error & 0x20;
+                    if(temp>0) // Fault bit D5 is Set
+                    temp = Fault_Error & 0x10;
+                    if(temp>0) // Fault bit D4 is Set
+                    temp = Fault_Error &0x08;
+                    if(temp>0) // Fault bit D3 is Set
+                    temp = Fault_Error &0x04;
+                    if(temp>0) // Fault bit D2 is Set
+
+                    // Fault register isn't cleared automatically. Users are
+                    // expected to clear it after every fault.
+                    max_spi_write(CONFIGURATION, 0b10000010);
+                    _delay_ms(700);
+
+                    // Setting the device in auto configuration again.
+                    max_spi_write(CONFIGURATION, 0b11000000);
+                    _delay_ms(700);
+                }
+            }
+
 
         } // end timer done
 
