@@ -218,6 +218,12 @@ int main(void){
     max_init_port();
     init_max();
 
+    usart_write("Compiliert at "__DATE__" - "__TIME__"\n");
+    usart_write("Compiliert with GCC Version "__VERSION__"\n");
+
+    usart_write("Everything initialised\r\n");
+
+
     _delay_ms(100);
     uint8_t status_cnt = 0; ///< status counter simple free running counter
 
@@ -227,6 +233,8 @@ int main(void){
         // read and reset counts from timer1
         if(timerDone){
             timerDone = false;
+            usart_write("Timer done ...\n");
+            usart_write("%x \n", status_cnt);
 
             // handle counter
             data[I2C_FREQ_STATUS_CNT] = status_cnt;           // status counter
