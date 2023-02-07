@@ -106,6 +106,7 @@ void initTimer(void){
     // 16MHz / 1024 / 125 = 125 Hz
     OCR0A = 125-1;
     cnt1Hz = COUNTS_1HZ;
+
     timerDone = false;
 
     // allow Compare Interrupt
@@ -213,10 +214,9 @@ void setup(void){
 int main(void){
     setup();    // setup everything
 
-
     // INIT MAX31865
-    max_init_port();
-    init_max();
+    uint8_t Fault_Error;
+    uint8_t max_connected;
 
     usart_write("Compiliert at "__DATE__" - "__TIME__"\n");
     usart_write("Compiliert with GCC Version "__VERSION__"\n");
@@ -292,6 +292,7 @@ int main(void){
                     // register -> Datasheet page 16
                     Fault_Error = max_spi_read(FAULT_STATUS);
 
+                    uint8_t temp = 0;
                     temp = Fault_Error & 0x80;
                     if(temp>0) // Fault bit D7 is Set
                     temp = Fault_Error & 0x40;
@@ -324,7 +325,6 @@ int main(void){
         if( newI2Crecv ){
             // reset I2C recv notifier
        		newI2Crecv = false;
-
 
             // check, whether boardID has been changed.
             if( data[BOARD_ID] != BoardID ){
