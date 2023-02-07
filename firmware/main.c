@@ -35,6 +35,9 @@ uint8_t i;  // some variable for counting
 uint8_t EEMEM addr_BoardID = 0x99;
 uint8_t BoardID;
 
+uint8_t EEMEM addr_max_cfg = 0b11000000; // Vbias on, auto mode
+uint8_t max_cfg;
+
 /******************************************************************************/
 // I2C
 #define I2C_ADDR            0x10    ///< I2C base address
@@ -126,9 +129,11 @@ ISR (TIMER0_COMPA_vect){
 }
 /******************************************************************************/
 
-void readBoardID(void){
+void readEEPROM(void){
     // read BoardID from EEPROM
     BoardID = eeprom_read_byte(&addr_BoardID);
+    // read MAX31865 configuration from EEPROM
+    max_cfg = eeprom_read_byte(&addr_max_cfg);
 }
 
 /******************************************************************************/
@@ -153,7 +158,7 @@ void setup(void){
 
     ////////////////////////////////////////////////////////////////////
     // EEPROM
-    readBoardID();
+    readEEPROM();
 
     ////////////////////////////////////////////////////////////////////
     // setup I2C
@@ -332,8 +337,13 @@ int main(void){
             // check, whether boardID has been changed.
             if( data[BOARD_ID] != BoardID ){
                 eeprom_write_byte( &addr_BoardID, data[BOARD_ID] );
-                readBoardID();
+                readEEPROM();
                 data[BOARD_ID] = BoardID;
+            }
+            if( data[I2C_MAX31865_CONFIG] != max_cfg){
+                eeprom_write_byte( &addr_max_cfg, data[I2C_MAX31865_CONFIG] );
+                readEEPROM();
+                data[I2C_MAX31865_CONFIG] = BoardID;
             }
 
         } // end newI2Crecv

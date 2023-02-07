@@ -42,6 +42,8 @@ enum I2C_regs{
 
     I2C_SIZE_READONLY,  ///< define readonly sector
 
+    I2C_MAX31865_CONFIG,        ///< configuration of MAX31865
+
     BOARD_ID,           ///< Board ID from EEPROM
 
     I2C_SIZE            ///< maximal used I2C address
