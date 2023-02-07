@@ -13,9 +13,10 @@ enum I2C_regs{
  * \defgroup RDonly readonly address map
  */
 /**@{*/
-    I2C_FREQ_STATUS_CNT = 0,///< status counter
-    I2C_MAX31865_RTD0,
-    I2C_MAX31865_RTD1,
+    I2C_FREQ_STATUS_CNT = 0,    ///< status counter
+    I2C_MAX31865_RTD0,          ///< LSBs of RTD value
+    I2C_MAX31865_RTD1,          ///< MSBs of RTD values
+    I2C_MAX31865_FAULT,         ///< content of fault register
 /**@}*/ // close RDonly
 
 /**
