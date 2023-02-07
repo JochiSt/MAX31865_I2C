@@ -7,6 +7,8 @@ class MAX31865_I2C(object):
     CNT_REG_ADDR = [0x00, 0x00]
     RTD_REG_ADDR = [0x00, 0x01]
 
+    R_REF = 4300
+
     def __init__(self, i2c_bus, MAX31865_I2C_ADDR = 0x17):
         self.bus = i2c_bus
         self.addr = MAX31865_I2C_ADDR
@@ -24,6 +26,10 @@ class MAX31865_I2C(object):
         data = bus.read_i2c_block_raw(self.addr, 1)
         return int.from_bytes(data, 'big')
 
+    def convertADC2RTD(self, ADC):
+        RRTD = (ADC * self.R_REF) / 2**15
+        return RRTD
+
 from i2c_mp_usb import I2C_MP_USB as SMBus
 bus = SMBus()
 bus.set_baudrate(100)
@@ -34,8 +40,10 @@ try:
 
     if max31865i2c.probe():
         print('device ready')
-        print(max31865i2c.readCounter())
-        print(max31865i2c.readRTD())
+        print("Status cnt", max31865i2c.readCounter())
+        max_adc = max31865i2c.readRTD()
+        print("ADC counts", max_adc)
+        print("resistor  ", max31865i2c.convertADC2RTD(max_adc), "Ohm")
     else:
         print('device not ready')
 except Exception as e:
