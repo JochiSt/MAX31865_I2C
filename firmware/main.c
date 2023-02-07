@@ -20,6 +20,7 @@
 // own includes
 #include "io_manipulation.h"
 #include "config.h"
+#include "usart.h"
 
 #include "i2c_register_map.h"
 
@@ -197,6 +198,9 @@ void setup(void){
     data[CPP_TIME_5] = __TIME__[7]; // s
 
     data[BOARD_ID] = BoardID;
+
+    // init the UART
+    usart_init(BAUDRATE);
 
     // activate global interrupts
     sei();
