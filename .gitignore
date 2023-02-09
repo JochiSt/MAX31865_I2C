@@ -54,3 +54,5 @@ dkms.conf
 
 .spyproject/*
 *.elay
+
+*/doc/*
