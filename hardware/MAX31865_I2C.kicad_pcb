@@ -5,6 +5,10 @@
   )
 
   (paper "A4")
+  (title_block
+    (comment 4 "AISLER Project ID: IYFKSMYY")
+  )
+
   (layers
     (0 "F.Cu" signal)
     (31 "B.Cu" signal)
@@ -2330,7 +2334,7 @@
   (dimension (type aligned) (layer "Dwgs.User") (tstamp b2e4f276-8d2a-4381-9ecc-45f04cea1911)
     (pts (xy 138.3411 93.5736) (xy 158.6771 93.5736))
     (height -4.9784)
-    (gr_text "20,336 mm" (at 148.5091 87.4452) (layer "Dwgs.User") (tstamp 6bc137e2-9b31-45e8-a5c9-99dd5c4520e7)
+    (gr_text "20.336 mm" (at 148.5091 87.4452) (layer "Dwgs.User") (tstamp b2e4f276-8d2a-4381-9ecc-45f04cea1911)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (format (prefix "") (suffix "") (units 2) (units_format 1) (precision 4) suppress_zeroes)
@@ -2340,7 +2344,7 @@
     (pts (xy 135.7884 116.2304) (xy 161.2011 116.4336))
     (height 5.382954)
     (orientation 0)
-    (gr_text "25,4127 mm" (at 148.49475 120.463354) (layer "Dwgs.User") (tstamp 2f036836-b856-4aa2-9310-78e1604cb41d)
+    (gr_text "25.4127 mm" (at 148.49475 120.463354) (layer "Dwgs.User") (tstamp 9a6355c6-c484-4502-ae4d-ca9f6aac7e7f)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (format (prefix "") (suffix "") (units 2) (units_format 1) (precision 4) suppress_zeroes)
@@ -2350,7 +2354,7 @@
     (pts (xy 158.6611 118.9736) (xy 158.6611 91.0336))
     (height 5.6769)
     (orientation 1)
-    (gr_text "27,94 mm" (at 163.188 105.0036 90) (layer "Dwgs.User") (tstamp ee77ae8d-78f0-4f1b-b0d4-444fead13a31)
+    (gr_text "27.94 mm" (at 163.188 105.0036 90) (layer "Dwgs.User") (tstamp c938f886-bfbd-48d3-937b-295638babe8e)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (format (prefix "") (suffix "") (units 2) (units_format 1) (precision 4) suppress_zeroes)
