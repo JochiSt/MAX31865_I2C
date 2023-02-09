@@ -5,6 +5,7 @@
 	<Project>
 		<Option title="MAX31865 I2C" />
 		<Option makefile="makefile" />
+		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="armgcc_eb" />
 		<Build>
@@ -28,11 +29,31 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="config.h" />
+		<Unit filename="i2c_register_map.h" />
+		<Unit filename="I2CSlave.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="I2CSlave.h" />
+		<Unit filename="io_manipulation.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="makefile" />
+		<Unit filename="MAX31865_AVR\max31865.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MAX31865_AVR\max31865.h" />
+		<Unit filename="MAX31865_AVR\README.md" />
+		<Unit filename="usart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="usart.h" />
 		<Extensions>
 			<code_completion />
 			<debugger>
 				<target_debugging_settings target="Release">
-					<debug_interface description="" options="0" reg_filter="0" probe="" device="" speed="" bus_address="" serial="" defines="" scripts="" flash_size="" ram_size="" vcc_voltage="" verbose="7792264" unwind="1641417720" rstType="177666092" use_jtag="false" disable_cache="false" enable_semi="false" close_eblink="false" gdb_reset="" gdb_reset_remote="" gdb_before_conn="" gdb_after_conn="" use_remote="false" ip_address="" ip_port="" path="" executable="" start_server="false" arguments="" flash_verify="false" flash_run="false" />
+					<debug_interface description="" options="0" reg_filter="0" probe="" device="" speed="" bus_address="" serial="" defines="" scripts="" flash_size="" ram_size="" vcc_voltage="" verbose="7792264" unwind="1641417720" rstType="177666092" use_jtag="false" disable_cache="false" enable_semi="false" close_eblink="false" gdb_reset="" gdb_reset_remote="reset" gdb_before_conn="" gdb_after_conn="" use_remote="false" ip_address="" ip_port="" path="" executable="" start_server="false" arguments="" flash_verify="false" flash_run="false" />
 				</target_debugging_settings>
 			</debugger>
 			<envvars />
