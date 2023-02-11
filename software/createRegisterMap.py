@@ -2,13 +2,11 @@
 """
 
 """
-
-
 comment = False
 
 with open("../firmware/i2c_register_map.h") as reg_file:
     with open("MAX31865_I2C_registermap.py", "w") as pyreg:
-        pyreg.write("from AutoNumber import AutoNumber\n")
+        pyreg.write("from enum import Enum, auto\n")
         pyreg.write("")
 
         for line in reg_file:
@@ -42,7 +40,7 @@ with open("../firmware/i2c_register_map.h") as reg_file:
                 continue
 
             if 'enum' in line:
-                pyreg.write("class MAX31865_I2C_registermap(AutoNumber):\n")
+                pyreg.write("class MAX31865_I2C_registermap(Enum):\n")
                 continue
 
             line = line.strip()
@@ -53,8 +51,8 @@ with open("../firmware/i2c_register_map.h") as reg_file:
             line_comment = line_comment.replace('/','')
 
             if '=' in line:
-                pyreg.write("\t%s #%s\n"%(line, line_comment))
+                pyreg.write("    %s #%s\n"%(line, line_comment))
             else:
-                pyreg.write("\t%s = () #%s\n"%(line, line_comment))
+                pyreg.write("    %s = auto() #%s\n"%(line, line_comment))
 
 
