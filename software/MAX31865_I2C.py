@@ -2,6 +2,7 @@
 """
 
 """
+from from MAX31865_I2C_registermap import MAX31865_I2C_registermap
 
 class MAX31865_I2C(object):
     CNT_REG_ADDR = [0x00, 0x00]
@@ -17,11 +18,13 @@ class MAX31865_I2C(object):
         return self.bus.probe_device(self.addr)
 
     def readRTD(self):
-        bus.write_i2c_block_raw(self.addr, MAX31865_I2C.RTD_REG_ADDR)
+        addr = MAX31865_I2C_registermap.I2C_MAX31865_RTD0.value.to_bytes(2, 'big')
+        bus.write_i2c_block_raw(self.addr, addr)
         data = bus.read_i2c_block_raw(self.addr, 2)
         return data[1] << 7 | data[0]
 
     def readCounter(self):
+        addr = MAX31865_I2C_registermap.I2C_STATUS_CNT.value.to_bytes(2, 'big')
         bus.write_i2c_block_raw(self.addr, MAX31865_I2C.CNT_REG_ADDR)
         data = bus.read_i2c_block_raw(self.addr, 1)
         return int.from_bytes(data, 'big')
