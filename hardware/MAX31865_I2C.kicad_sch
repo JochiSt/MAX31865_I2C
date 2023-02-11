@@ -1548,6 +1548,12 @@
     (uuid ff7e938b-3bfe-4bbd-831d-e7750fbe16cc)
   )
 
+  (rectangle (start 209.55 21.59) (end 217.17 53.34)
+    (stroke (width -0.0001) (type default))
+    (fill (type color) (color 0 194 0 0.3))
+    (uuid 37ce8987-cc79-44a4-a204-fe591659812b)
+  )
+
   (text_box "SS must be defined as output or kept at high level, otherwise SPI master is not working"
     (at 77.47 60.96 0) (size 35.56 6.35)
     (stroke (width 0) (type default))
@@ -1576,7 +1582,11 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a6248f97-f429-43b7-9798-557fe2ce7ced)
   )
-  (text "all 0 Ohm" (at 209.55 55.88 0)
+  (text "I2C Bus connector" (at 106.68 33.02 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid c037abce-a9e8-48f9-99d3-23dd1da79ae2)
+  )
+  (text "all 0 Ohm" (at 208.28 55.88 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid d07eb499-f7e0-4fdd-8a60-8aa4fa6fd16a)
   )
