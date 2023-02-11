@@ -51,8 +51,9 @@ with open("../firmware/i2c_register_map.h") as reg_file:
             line_comment = line_comment.replace('/','')
 
             if '=' in line:
-                pyreg.write("    %s #%s\n"%(line, line_comment))
+                line, value = line.split('=')
+                pyreg.write("    %-20s = %-6d #%s\n"%(line, int(value), line_comment))
             else:
-                pyreg.write("    %s = auto() #%s\n"%(line, line_comment))
+                pyreg.write("    %-20s = auto() #%s\n"%(line, line_comment))
 
 
