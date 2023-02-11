@@ -2,10 +2,17 @@
 """
 
 """
+import time
 comment = False
 
 with open("../firmware/i2c_register_map.h") as reg_file:
     with open("MAX31865_I2C_registermap.py", "w") as pyreg:
+        pyreg.write('"""\n')
+        pyreg.write(' '*4 + 'Generated python register map\n')
+        pyreg.write(' '*4 + 'Do NOT make any changes here!\n')
+        pyreg.write(' '*4 + 'Change generator script\n')
+        pyreg.write(' '*4 + 'generated at '+time.strftime('%d.%m.%y %H:%M')+'\n')
+        pyreg.write('"""\n')
         pyreg.write("from enum import Enum, auto\n")
         pyreg.write("")
 
