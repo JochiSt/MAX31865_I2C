@@ -56,3 +56,5 @@ dkms.conf
 *.elay
 
 */doc/*
+
+*/__pycache__/*
