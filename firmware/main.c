@@ -276,7 +276,7 @@ int main(void){
             usart_write("%x \n", status_cnt);
 
             // handle counter
-            data[I2C_FREQ_STATUS_CNT] = status_cnt;           // status counter
+            data[I2C_STATUS_CNT] = status_cnt;           // status counter
 
             TOGGLE(LED1);   // toggle LED as keep alive signal
 

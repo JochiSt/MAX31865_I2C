@@ -2,11 +2,11 @@
     Generated python register map
     Do NOT make any changes here!
     Change generator script
-    generated at 11.02.23 20:53
+    generated at 11.02.23 20:58
 """
 from enum import Enum, auto
 class MAX31865_I2C_registermap(Enum):
-    I2C_FREQ_STATUS_CNT  = 0      # status counter
+    I2C_STATUS_CNT       = 0      # status counter
     I2C_MAX31865_RTD0    = auto() # LSBs of RTD value
     I2C_MAX31865_RTD1    = auto() # MSBs of RTD values
     I2C_MAX31865_FAULT   = auto() # content of fault register
