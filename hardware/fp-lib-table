@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name "PinHeaderEdgeMount")(type "KiCad")(uri "${KIPRJMOD}/PinHeaderEdgeMount.pretty")(options "")(descr ""))
+  (lib (name "MadeByJochen")(type "KiCad")(uri "C:/Users/steinmann/Documents/GitHub/KiCAD_MadeByJochen/MadeByJochen.pretty")(options "")(descr ""))
 )
