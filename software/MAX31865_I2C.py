@@ -5,8 +5,6 @@
 from MAX31865_I2C_registermap import MAX31865_I2C_registermap
 
 class MAX31865_I2C(object):
-    CNT_REG_ADDR = [0x00, 0x00]
-    RTD_REG_ADDR = [0x00, 0x01]
 
     R_REF = 4300
 
