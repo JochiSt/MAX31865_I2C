@@ -6,11 +6,10 @@ from MAX31865_I2C_registermap import MAX31865_I2C_registermap
 
 class MAX31865_I2C(object):
 
-    R_REF = 4300
-
-    def __init__(self, i2c_bus, MAX31865_I2C_ADDR = 0x17):
+    def __init__(self, i2c_bus, MAX31865_I2C_ADDR = 0x17, R_REF = 4300):
         self.bus = i2c_bus
         self.addr = MAX31865_I2C_ADDR
+        self.R_REF = R_REF
 
     def probe(self):
         return self.bus.probe_device(self.addr)
