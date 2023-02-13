@@ -293,24 +293,10 @@ int main(void){
                     // Any fault have been detected
                     // Here you can read the type of fault from fault status
                     // register -> Datasheet page 16
+
                     Fault_Error = max_spi_read(FAULT_STATUS);
-
-                    uint8_t temp = 0;
-                    temp = Fault_Error & 0x80;
-                    if(temp>0) // Fault bit D7 is Set
-                    temp = Fault_Error & 0x40;
-                    if(temp>0) // Fault bit D6 is Set
-                    temp = Fault_Error & 0x20;
-                    if(temp>0) // Fault bit D5 is Set
-                    temp = Fault_Error & 0x10;
-                    if(temp>0) // Fault bit D4 is Set
-                    temp = Fault_Error &0x08;
-                    if(temp>0) // Fault bit D3 is Set
-                    temp = Fault_Error &0x04;
-                    if(temp>0) // Fault bit D2 is Set
-
-
                     data[I2C_MAX31865_FAULT] = Fault_Error;
+
                     // Fault register isn't cleared automatically. Users are
                     // expected to clear it after every fault.
                     max_spi_write(CONFIGURATION, 0b10000010);
