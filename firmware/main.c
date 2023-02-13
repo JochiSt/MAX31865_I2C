@@ -261,7 +261,8 @@ int main(void){
             D0 - 50Hz/60Hz filter (1-50Hz, 0-60Hz)
     */
     if(max_connected){
-        max_spi_write(CONFIGURATION, 0b11000000); // Vbias on, auto mode
+        usart_write("configure MAX31865 with %x\n", max_cfg);
+        max_spi_write(CONFIGURATION, max_cfg); // Vbias on, auto mode
     }
 
     _delay_ms(100);
@@ -302,8 +303,8 @@ int main(void){
                     max_spi_write(CONFIGURATION, 0b10000010);
                     _delay_ms(700);
 
-                    // Setting the device in auto configuration again.
-                    max_spi_write(CONFIGURATION, 0b11000000);
+                    // Setting the device to the stored configuration again.
+                    max_spi_write(CONFIGURATION, max_cfg);
                     _delay_ms(700);
                 }else{
                     // no fault
@@ -329,7 +330,8 @@ int main(void){
             if( data[I2C_MAX31865_CONFIG] != max_cfg){
                 eeprom_write_byte( &addr_max_cfg, data[I2C_MAX31865_CONFIG] );
                 readEEPROM();
-                data[I2C_MAX31865_CONFIG] = BoardID;
+                data[I2C_MAX31865_CONFIG] = max_cfg;
+                max_spi_write(CONFIGURATION, max_cfg);
             }
 
         } // end newI2Crecv
