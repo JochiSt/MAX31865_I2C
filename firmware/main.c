@@ -35,7 +35,18 @@ uint8_t i;  // some variable for counting
 uint8_t EEMEM addr_BoardID = 0x99;
 uint8_t BoardID;
 
-uint8_t EEMEM addr_max_cfg = 0b11000000; // Vbias on, auto mode
+/**
+    Set max CONFIGURATION register - datasheet page 13
+    D7   - Vbias (1-on, 0-off)
+    D6   - Conversion mode (1-auto, 0-normally off)
+    D5   - Single shot (1-1shot)
+    D4   - Wiring (1-3wire, 0-2/4wire)
+    D3,2 - Fault detection cycle control (datasheet page 14, table 3)
+    D1   - Fault status clear (1 - clear fault status register)
+    D0   - 50Hz/60Hz filter (1-50Hz, 0-60Hz)
+    Vbias on, auto mode
+*/
+uint8_t EEMEM addr_max_cfg = 0b11000000;
 uint8_t max_cfg;
 
 /******************************************************************************/
@@ -239,30 +250,17 @@ int main(void){
     max_connected = init_max();
 
 
-    if (max_connected) // Communication successful with max31865, do something
-    {
+    if (max_connected){ // Communication successful with max31865, do something
         usart_write("MAX31865 connected\n");
 
-    }
-    else // Unable to communicate with the device, do something
-    {
+    }else{ // Unable to communicate with the device, do something
         usart_write("MAX31865 not connected\n");
     }
 
-
-    // Set max CONFIGURATION register - datasheet page 13
-    /*
-            D7 - Vbias (1-on, 0-off)
-            D6 - Conversion mode (1-auto, 0-normally off)
-            D5 - Single shot (1-1shot)
-            D4 - Wiring (1-3wire, 0-2/4wire)
-            D3,2 - Fault detection cycle control (datasheet page 14, table 3)
-            D1 - Fault status clear (1 - clear fault status register)
-            D0 - 50Hz/60Hz filter (1-50Hz, 0-60Hz)
-    */
+    // Set max CONFIGURATION register
     if(max_connected){
         usart_write("configure MAX31865 with %x\n", max_cfg);
-        max_spi_write(CONFIGURATION, max_cfg); // Vbias on, auto mode
+        max_spi_write(CONFIGURATION, max_cfg);
     }
 
     _delay_ms(100);
