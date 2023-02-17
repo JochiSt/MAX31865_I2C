@@ -5,8 +5,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define LED0    D,5
-#define LED1    D,6
+#define LED0    D,5     // access via I2C
+#define LED1    D,6     // keep alive signal
 
 #define ADDR0   D,2
 #define ADDR1   D,3
