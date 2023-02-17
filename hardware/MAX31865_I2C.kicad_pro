@@ -213,10 +213,10 @@
   },
   "erc": {
     "erc_exclusions": [
-      "label_dangling|2349500|304800|b5d64a87-beca-494b-9644-704cc434c3d2|00000000-0000-0000-0000-000000000000",
-      "power_pin_not_driven|469900|1282700|3d232dea-77c7-4df9-b3a3-b476e1e84057|00000000-0000-0000-0000-000000000000",
-      "power_pin_not_driven|469900|520700|872b5933-0fc1-4f81-89e0-db53c228ebd7|00000000-0000-0000-0000-000000000000",
-      "power_pin_not_driven|495300|520700|9aa1b9fd-348f-46a5-bde7-2553197800fe|00000000-0000-0000-0000-000000000000"
+      "label_dangling|2349500|304800|b5d64a87-beca-494b-9644-704cc434c3d2|00000000-0000-0000-0000-000000000000|||",
+      "power_pin_not_driven|469900|1282700|3d232dea-77c7-4df9-b3a3-b476e1e84057|00000000-0000-0000-0000-000000000000|||",
+      "power_pin_not_driven|469900|520700|872b5933-0fc1-4f81-89e0-db53c228ebd7|00000000-0000-0000-0000-000000000000|||",
+      "power_pin_not_driven|495300|520700|9aa1b9fd-348f-46a5-bde7-2553197800fe|00000000-0000-0000-0000-000000000000|||"
     ],
     "meta": {
       "version": 0
@@ -500,7 +500,9 @@
     "page_layout_descr_file": "KiCAD_Templates\\PLAIN_DINA4.kicad_wks",
     "plot_directory": "",
     "spice_adjust_passive_values": false,
+    "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
+    "spice_model_current_sheet_as_root": true,
     "spice_save_all_currents": false,
     "spice_save_all_voltages": false,
     "subpart_first_id": 65,

@@ -1,4 +1,4 @@
-(kicad_sch (version 20221206) (generator eeschema)
+(kicad_sch (version 20230121) (generator eeschema)
 
   (uuid 4d7972c0-b329-4137-a4d7-44898e682941)
 
@@ -1924,7 +1924,7 @@
     (property "Reference" "D2" (at 233.68 133.0325 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "LED" (at 233.68 135.5725 90)
+    (property "Value" "LED gn" (at 233.68 135.5725 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 229.87 132.08 0)
@@ -2515,7 +2515,7 @@
     (property "Reference" "D1" (at 219.71 133.0325 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "LED" (at 219.71 135.5725 90)
+    (property "Value" "LED yl" (at 219.71 135.5725 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 215.9 132.08 0)

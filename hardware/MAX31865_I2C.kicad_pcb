@@ -6,6 +6,8 @@
 
   (paper "A4")
   (title_block
+    (title "MAX31865 SPI to I2C bridge")
+    (rev "1")
     (comment 4 "AISLER Project ID: IYFKSMYY")
   )
 
