@@ -80,19 +80,7 @@ struct {
         #define USART_RX USART_RXC_vect
 	#endif
 
-	#if defined (__AVR_ATmega88__)
-		#define USR UCSR0A
-		#define UCR UCSR0B
-		#define UBRR UBRR0L
-		#define TXEN TXEN0
-		#define RXEN RXEN0
-		#define RXCIE RXCIE0
-		#define UDR UDR0
-		#define UDRE UDRE0
-		#define USART_RX USART_RX_vect
-	#endif
-
-    #if defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega48__)
+    #if defined (__AVR_ATmega328__) || defined (__AVR_ATmega328P__) || defined (__AVR_ATmega88__) || defined (__AVR_ATmega48__) || defined (__AVR_ATmega88P__) || defined (__AVR_ATmega48P__)
         #define USR UCSR0A
         #define UCR UCSR0B
         #define UBRR UBRR0L
