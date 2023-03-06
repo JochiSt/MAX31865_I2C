@@ -163,6 +163,13 @@ void setup(void){
     SET_INPUT(ADDR2);
     SET(ADDR2);
 
+    // LED outputs
+    SET_OUTPUT(LED0);
+    SET(LED0);
+
+    SET_OUTPUT(LED1);
+    SET(LED1);
+
     ////////////////////////////////////////////////////////////////////
     // initialize timer
     initTimer();
