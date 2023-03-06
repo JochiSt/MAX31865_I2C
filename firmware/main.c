@@ -44,9 +44,8 @@ uint8_t BoardID;
     D3,2 - Fault detection cycle control (datasheet page 14, table 3)
     D1   - Fault status clear (1 - clear fault status register)
     D0   - 50Hz/60Hz filter (1-50Hz, 0-60Hz)
-    Vbias on, auto mode
 */
-uint8_t EEMEM addr_max_cfg = 0b11000000;
+uint8_t EEMEM addr_max_cfg = 0b11000000;    // Vbias on, auto mode
 uint8_t max_cfg;
 
 /******************************************************************************/
