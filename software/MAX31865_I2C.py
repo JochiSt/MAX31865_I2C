@@ -30,7 +30,7 @@ class MAX31865_I2C(object):
         None.
 
         """
-        if MAX_I2C_ADDR > 0x17 or MAX_I2C_ADDR < 0x10:
+        if MAX31865_I2C_ADDR > 0x17 or MAX31865_I2C_ADDR < 0x10:
             raise ValueError("address for MAX31865 invalid")
 
         self.bus = i2c_bus
