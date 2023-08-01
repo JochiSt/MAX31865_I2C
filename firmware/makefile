@@ -1,5 +1,5 @@
-DEVICE = atmega48p
-MCU    = atmega48p
+DEVICE = atmega88
+MCU    = atmega88
 F_CPU  = 16000000
 TARGET = MAX31865_I2C
 
