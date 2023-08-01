@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <EmBitz_project_file>
-	<EmBitzVersion release="2.50" revision="0" />
+	<EmBitzVersion release="2.60" revision="0" />
 	<FileVersion major="2" minor="0" />
 	<Project>
 		<Option title="MAX31865 I2C" />
@@ -45,6 +45,14 @@
 		</Unit>
 		<Unit filename="MAX31865_AVR\max31865.h" />
 		<Unit filename="MAX31865_AVR\README.md" />
+		<Unit filename="maxim1wire\DS18B20.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="maxim1wire\DS18B20.h" />
+		<Unit filename="maxim1wire\OneWire.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="maxim1wire\OneWire.h" />
 		<Unit filename="usart.c">
 			<Option compilerVar="CC" />
 		</Unit>

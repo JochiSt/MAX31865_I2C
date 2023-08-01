@@ -8,16 +8,28 @@ OBJCOPY = avr-objcopy
 
 INCLUDES = -I./ -I/usr/lib/avr/include
 
-CFLAGS   += -std=c99
-CFLAGS   += -Wall -Wextra
-CFLAGS   += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
-CFLAGS   += -Os
-CFLAGS   += -Wold-style-definition
-CFLAGS   += $(INCLUDES)
+CFLAGS += -std=c99
+CFLAGS += -Wall -Wextra
+CFLAGS += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
+CFLAGS += -Os
+CFLAGS += -Wold-style-definition
+CFLAGS += $(INCLUDES)
+
+
+# comile flags for 1wire
+CFLAGS += -DONEWIRE_CHECK_CRC=1
+CFLAGS += -DONEWIRE_USE_MACROS=0
+CFLAGS += -DONEWIRE_PORTIN=PINB
+CFLAGS += -DONEWIRE_PORT=PORTB
+CFLAGS += -DONEWIRE_IO_CTL=DDRB
+CFLAGS += -DONEWIRE_PIN=0
 
 LDFLAGS  = -Wl,-gc-sections -Wl,-relax
 
-OBJECT_FILES = main.o I2CSlave.o MAX31865_AVR/max31865.o usart.o
+OBJECT_FILES = main.o
+OBJECT_FILES+= MAX31865_AVR/max31865.o I2CSlave.o
+OBJECT_FILES+= maxim1wire/DS18B20.o maxim1wire/OneWire.o
+OBJECT_FILES+= usart.o
 
 .PHONY: Release program fuses all size clean doc
 

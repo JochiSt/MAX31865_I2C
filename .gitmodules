@@ -4,3 +4,6 @@
 [submodule "hardware/KiCAD_Templates"]
 	path = hardware/KiCAD_Templates
 	url = https://github.com/JochiSt/KiCAD_Templates.git
+[submodule "firmware/maxim1wire"]
+	path = firmware/maxim1wire
+	url = https://github.com/nall/maxim1wire.git

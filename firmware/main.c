@@ -27,6 +27,9 @@
 #include "I2CSlave.h"
 #include "MAX31865_AVR/max31865.h"
 
+#include "maxim1wire/OneWire.h"
+#include "maxim1wire/DS18B20.h"
+
 /******************************************************************************/
 uint8_t i;  // some variable for counting
 
@@ -224,6 +227,10 @@ void setup(void){
 
     // init the UART
     usart_init(BAUDRATE);
+
+    // init the 1wire module
+    onewire_init();
+    onewire_reset();
 
     // activate global interrupts
     sei();
