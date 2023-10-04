@@ -28,6 +28,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 volatile unsigned char buffercounter = 0;
 char usart_rx_buffer[BUFFER_SIZE];
@@ -178,13 +179,13 @@ ISR (USART_RX)
     if (usart_status.usart_ready)
     {
         usart_status.usart_rx_ovl = 1;
-        return 0;
+        return;
     }
 
     if (receive_char == 0x08)
     {
         if (buffercounter) buffercounter--;
-        return 0;
+        return;
     }
 
     if (receive_char == '\r' && (!(usart_rx_buffer[buffercounter-1] == '\\')))
@@ -192,14 +193,14 @@ ISR (USART_RX)
         usart_rx_buffer[buffercounter] = 0;
         buffercounter = 0;
         usart_status.usart_ready = 1;
-        return 0;
+        return;
     }
 
     if (buffercounter < BUFFER_SIZE - 1)
     {
         usart_rx_buffer[buffercounter++] = receive_char;
     }
-    return 0;
+    return;
 }
 
 
