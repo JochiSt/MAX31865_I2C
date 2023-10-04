@@ -12,7 +12,6 @@ CFLAGS   += -std=c99
 CFLAGS   += -Wall -Wextra
 CFLAGS   += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 CFLAGS   += -Os
-CFLAGS   += -Wold-style-definition
 CFLAGS   += $(INCLUDES)
 
 LDFLAGS  = -Wl,-gc-sections -Wl,-relax
