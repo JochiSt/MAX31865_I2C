@@ -35,9 +35,9 @@ doc:
 program: $(TARGET).hex
 	avrdude -c avrispmkII -p $(DEVICE) -U flash:w:"$(TARGET).hex":a
 
-# fuses from https://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega328p&LOW=DE&HIGH=DA&EXTENDED=FD&LOCKBIT=FF
+# fuses from https://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega88a&LOW=DE&HIGH=DF&EXTENDED=FD&LOCKBIT=FF
 fuses:
-	avrdude -c avrispmkII -p $(DEVICE) -U lfuse:w:0xDE:m -U  hfuse:w:0xDA:m -U efuse:w:0xFD:m -U lock:w:0xFF:m
+	avrdude -c avrispmkII -p $(DEVICE) -U lfuse:w:0xDE:m -U hfuse:w:0xDF:m -U efuse:w:0xFD:m -U lock:w:0xFF:m
 
 ###############################################################################
 $(TARGET).hex: $(TARGET).obj
