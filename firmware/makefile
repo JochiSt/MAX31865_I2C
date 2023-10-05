@@ -6,7 +6,7 @@ TARGET = MAX31865_I2C
 CC      = avr-gcc
 OBJCOPY = avr-objcopy
 
-INCLUDES = -I./ -I/usr/lib/avr/include
+INCLUDES = -I./
 
 CFLAGS   += -std=c99
 CFLAGS   += -Wall -Wextra
