@@ -12,6 +12,8 @@ CFLAGS   += -std=c99
 CFLAGS   += -Wall -Wextra
 CFLAGS   += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 CFLAGS   += -Os
+# enable / disable DEBUG UART output
+#CFLAGS   += -DDEBUG_UART
 CFLAGS   += $(INCLUDES)
 
 LDFLAGS  = -Wl,-gc-sections -Wl,-relax

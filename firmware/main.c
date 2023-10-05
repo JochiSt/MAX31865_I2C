@@ -20,7 +20,10 @@
 // own includes
 #include "io_manipulation.h"
 #include "config.h"
+
+#ifdef DEBUG_UART
 #include "usart.h"
+#endif
 
 #include "i2c_register_map.h"
 
@@ -222,8 +225,10 @@ void setup(void){
 
     data[BOARD_ID] = BoardID;
 
+    #ifdef DEBUG_UART
     // init the UART
     usart_init(BAUDRATE);
+    #endif
 
     // activate global interrupts
     sei();
@@ -240,32 +245,43 @@ int main(void){
     uint8_t Fault_Error;
     uint8_t max_connected;
 
-    usart_write("Compiliert at "__DATE__" - "__TIME__"\n");
-    usart_write("Compiliert with GCC Version "__VERSION__"\n");
+    #ifdef DEBUG_UART
+        usart_write("Compiliert at "__DATE__" - "__TIME__"\n");
+        usart_write("Compiliert with GCC Version "__VERSION__"\n");
 
-    usart_write("Everything initialised\n");
+        usart_write("Everything initialised\n");
 
-    usart_write("MAX31865 port INIT\n");
+        usart_write("MAX31865 port INIT\n");
+    #endif
     max_init_port();
 
-    usart_write("waiting until everything settled\n");
+    #ifdef DEBUG_UART
+        usart_write("waiting until everything settled\n");
+    #endif
+
     _delay_ms(2000);
     // Initializes communication with max
     // If communication is done properly function returns 1, otherwise returns 0
-    usart_write("testing the connection\n");
+
+    #ifdef DEBUG_UART
+        usart_write("testing the connection\n");
+    #endif
     max_connected = init_max();
 
+    #ifdef DEBUG_UART
+        if (max_connected){ // Communication successful with max31865, do something
+            usart_write("MAX31865 connected\n");
 
-    if (max_connected){ // Communication successful with max31865, do something
-        usart_write("MAX31865 connected\n");
-
-    }else{ // Unable to communicate with the device, do something
-        usart_write("MAX31865 not connected\n");
-    }
+        }else{ // Unable to communicate with the device, do something
+            usart_write("MAX31865 not connected\n");
+        }
+    #endif
 
     // Set max CONFIGURATION register
     if(max_connected){
-        usart_write("configure MAX31865 with %x\n", max_cfg);
+        #ifdef DEBUG_UART
+            usart_write("configure MAX31865 with %x\n", max_cfg);
+        #endif
         max_spi_write(CONFIGURATION, max_cfg);
     }
 
@@ -277,9 +293,10 @@ int main(void){
         // read and reset counts from timer1
         if(timerDone){
             timerDone = false;
-            usart_write("Timer done ...\n");
-            usart_write("%x \n", status_cnt);
-
+            #ifdef DEBUG_UART
+                usart_write("Timer done ...\n");
+                usart_write("%x \n", status_cnt);
+            #endif
             // handle counter
             data[I2C_STATUS_CNT] = status_cnt;           // status counter
 
