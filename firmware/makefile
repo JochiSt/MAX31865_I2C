@@ -56,10 +56,3 @@ $(TARGET)_EEPROM.hex: $(TARGET).obj
 $(TARGET).obj: $(OBJECT_FILES)
 	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o $@
 
-
-%.hex: %.obj
-	avr-size -C --mcu=$(MCU) $<
-	$(OBJCOPY) -R .eeprom -O ihex $< $@
-
-%.obj: $(OBJECT_FILES)
-	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o $@
