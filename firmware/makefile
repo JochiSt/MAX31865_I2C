@@ -24,7 +24,7 @@ OBJECT_FILES = main.o I2CSlave.o MAX31865_AVR/max31865.o usart.o
 
 Release: all
 
-all: $(TARGET).hex
+all: $(TARGET).hex $(TARGET)_EEPROM.hex
 
 clean:
 	rm -rf *.o *.hex *.obj
@@ -33,8 +33,13 @@ doc:
 	doxygen
 
 ###############################################################################
-program: $(TARGET).hex
-	avrdude -c avrispmkII -p $(DEVICE) -U flash:w:"$(TARGET).hex":a
+program: prog_flash prog_eeprom
+
+prog_flash: $(TARGET).hex
+	avrdude -c avrispmkII -p $(DEVICE) -U flash:w:"$(TARGET).hex"
+
+prog_eeprom: $(TARGET)_EEPROM.hex
+	avrdude -c avrispmkII -p $(DEVICE) -U eeprom:w:"$(TARGET)_EEPROM.hex"
 
 # fuses from https://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega88a&LOW=DE&HIGH=D7&EXTENDED=FD&LOCKBIT=FF
 fuses:
@@ -44,6 +49,9 @@ fuses:
 $(TARGET).hex: $(TARGET).obj
 	avr-size -C --mcu=$(MCU) $<
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
+
+$(TARGET)_EEPROM.hex: $(TARGET).obj
+	$(OBJCOPY) -j .eeprom --change-section-lma .eeprom=0 -O ihex $< $@
 
 $(TARGET).obj: $(OBJECT_FILES)
 	$(CC) $(CFLAGS) $(OBJECT_FILES) $(LDFLAGS) -o $@
