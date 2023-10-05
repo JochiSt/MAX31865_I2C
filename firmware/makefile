@@ -3,6 +3,8 @@ MCU    = atmega88
 F_CPU  = 16000000
 TARGET = MAX31865_I2C
 
+BOARDID ?= 99
+
 CC      = avr-gcc
 OBJCOPY = avr-objcopy
 
@@ -12,6 +14,7 @@ CFLAGS   += -std=c99
 CFLAGS   += -Wall -Wextra
 CFLAGS   += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 CFLAGS   += -Os
+CFLAGS   += -DBOARDID=$(BOARDID)
 # enable / disable DEBUG UART output
 #CFLAGS   += -DDEBUG_UART
 CFLAGS   += $(INCLUDES)
@@ -20,9 +23,10 @@ LDFLAGS  = -Wl,-gc-sections -Wl,-relax
 
 OBJECT_FILES = main.o I2CSlave.o MAX31865_AVR/max31865.o usart.o
 
-.PHONY: Release program fuses all size clean doc
+.PHONY: Release program fuses all size clean doc prog_flash prog_eeprom
 
 Release: all
+	$(info Building $(BOARDID))
 
 all: $(TARGET).hex $(TARGET)_EEPROM.hex
 

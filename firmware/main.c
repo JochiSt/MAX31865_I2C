@@ -35,7 +35,7 @@ uint8_t i;  // some variable for counting
 
 /******************************************************************************/
 // Board ID
-uint8_t EEMEM addr_BoardID = 0x99;
+uint8_t EEMEM addr_BoardID = BOARDID;
 uint8_t BoardID;
 
 /**
