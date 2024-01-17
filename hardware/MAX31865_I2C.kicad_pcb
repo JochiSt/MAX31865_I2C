@@ -4068,7 +4068,7 @@
     (pts (xy 158.6611 118.9736) (xy 158.6611 91.0336))
     (height 12.7381)
     (orientation 1)
-    (gr_text "27,94 mm" (at 170.2492 105.0036 90) (layer "Dwgs.User") (tstamp c938f886-bfbd-48d3-937b-295638babe8e)
+    (gr_text "27.94 mm" (at 170.2492 105.0036 90) (layer "Dwgs.User") (tstamp c938f886-bfbd-48d3-937b-295638babe8e)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (format (prefix "") (suffix "") (units 2) (units_format 1) (precision 4) suppress_zeroes)
